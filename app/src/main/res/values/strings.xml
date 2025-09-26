@@ -9,6 +9,8 @@
     <!--    Text-->
     <string name="Nova_Atividade">Cadastrar Nova Atividade</string>
     <string name="descrição_seta">icone de uma seta</string>
+    <string name="titulo_itens">tarefas</string>
+
 
     <!--    Campos de identificação -->
     <string name="titulo">Titulo</string>

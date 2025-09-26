@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.room.entity.TarefaEntity
 
+//minhas queries
 @Dao
 interface TarefaDAO {
 

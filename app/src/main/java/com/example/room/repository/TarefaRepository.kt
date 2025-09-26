@@ -5,7 +5,9 @@ import com.example.room.entity.TarefaEntity
 
 class TarefaRepository private constructor(context: Context){
 
+
     private val tarefaDAO = TarefaDataBase.getDatabase(context).tarefaDAO()
+
 
     companion object {
         private lateinit var instance: TarefaRepository
