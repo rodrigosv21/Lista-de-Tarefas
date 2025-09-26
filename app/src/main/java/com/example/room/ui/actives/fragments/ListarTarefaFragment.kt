@@ -5,18 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.room.R
-
-
+import com.example.room.viewmodel.ListaViewModel
+import kotlin.getValue
 
 class ListarTarefaFragment : Fragment() {
+
+    private val viewModel: ListaViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nova_tarefa, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_lista, container, false)
+        return view
     }
 
 }

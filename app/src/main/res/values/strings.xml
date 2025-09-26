@@ -5,4 +5,26 @@
 
     <string name="Tarefas">Listar Tarefas</string>
     <string name="NovaTarefa">Nova Tarefa</string>
+
+    <!--    Text-->
+    <string name="Nova_Atividade">Cadastrar Nova Atividade</string>
+    <string name="descrição_seta">icone de uma seta</string>
+
+    <!--    Campos de identificação -->
+    <string name="titulo">Titulo</string>
+    <string name="descrição">Descrição</string>
+    <string name="nvl_prioridade">Nivel De Prioridade</string>
+
+    <!--    Meus chequeBox -->
+    <string name="cheq_baixa">Baixo</string>
+    <string name="cheq_media">Média</string>
+    <string name="cheq_alta">Alta</string>
+
+    <!--    Buttons -->
+    <string name="btn_salvar">Salvar</string>
+
+
+
+
+
 </resources>

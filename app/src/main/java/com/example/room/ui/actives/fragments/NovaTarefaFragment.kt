@@ -11,22 +11,19 @@ import com.example.room.viewmodel.TarefaViewModel
 
 class NovaTarefaFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NovaTarefaFragment()
-    }
 
     private val viewModel: TarefaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO: Use the ViewModel
     }
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        return inflater.inflate(R.layout.fragment_nova_tarefa2, container, false)
-//    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_nova_tarefa, container, false)
+        return view
+    }
 }
