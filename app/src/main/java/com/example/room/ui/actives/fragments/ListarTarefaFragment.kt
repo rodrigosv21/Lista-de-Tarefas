@@ -7,32 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.room.R
+import com.example.room.databinding.FragmentListaBinding
 import com.example.room.ui.actives.adapter.TarefaAdapter
 import com.example.room.viewmodel.ListaViewModel
 import kotlin.getValue
 
 class ListarTarefaFragment : Fragment() {
 
+    private var _binding: FragmentListaBinding? = null
+    private val binding get() = _binding!!
+
     private val adapter: TarefaAdapter = TarefaAdapter()
     private val viewModel: ListaViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_lista, container, false)
+    ): View {
+        _binding = FragmentListaBinding.inflate(inflater, container, false)
 
-
-        view.findViewById<RecyclerView>(R.id.recycler_tarefas).layoutManager =
-            LinearLayoutManager(requireContext())
-
-        view.findViewById<RecyclerView>(R.id.recycler_tarefas).adapter = adapter
+        binding.recyclerTarefas.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerTarefas.adapter = adapter
 
         observer()
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
@@ -46,4 +46,8 @@ class ListarTarefaFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null  // evita memory leak
+    }
 }

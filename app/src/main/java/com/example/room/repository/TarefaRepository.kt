@@ -3,7 +3,7 @@ package com.example.room.repository
 import android.content.Context
 import com.example.room.entity.TarefaEntity
 
-class TarefaRepository private constructor(context: Context){
+class TarefaRepository private constructor(context: Context) {
 
 
     private val tarefaDAO = TarefaDataBase.getDatabase(context).tarefaDAO()

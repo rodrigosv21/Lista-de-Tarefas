@@ -26,5 +26,3 @@ class TarefaViewHolder(private val item: ItensTarefasBinding) : RecyclerView.Vie
 
     }
 }
-
-

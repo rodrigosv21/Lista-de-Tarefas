@@ -1,22 +1,21 @@
 package com.example.room.ui.actives.fragments
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log.e
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.Toast
-import com.example.room.R
+import com.example.room.databinding.FragmentNovaTarefaBinding
 import com.example.room.entity.TarefaEntity
 import com.example.room.helper.TarefasConstants
 import com.example.room.viewmodel.TarefaViewModel
 
 class NovaTarefaFragment : Fragment() {
+
+    private var _binding: FragmentNovaTarefaBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: TarefaViewModel by viewModels()
 
@@ -24,45 +23,69 @@ class NovaTarefaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_nova_tarefa, container, false)
+        _binding = FragmentNovaTarefaBinding.inflate(inflater, container, false)
 
-        val titulotxt = view.findViewById<EditText>(R.id.ed_txt_titulo)
-        val descricao = view.findViewById<EditText>(R.id.ed_txt_descricao)
+        binding.btnCadastrarAtividade.setOnClickListener {
+            salvarTarefa()
+        }
 
-        val cheqBaixa1 = view.findViewById<CheckBox>(R.id.cheq_baixa)
-        val cheqMedia2 = view.findViewById<CheckBox>(R.id.cheq_media)
-        val cheqAlta3 = view.findViewById<CheckBox>(R.id.cheq_alta)
+        return binding.root
+    }
 
-        val btnSalvar = view.findViewById<Button>(R.id.btn_cadastrar_atividade)
+    private fun salvarTarefa() {
+        val titulo = binding.edTxtTitulo.text.toString().trim()
+        val descricao = binding.edTxtDescricao.text.toString().trim()
 
-        btnSalvar.setOnClickListener {
-            if (titulotxt.text.isEmpty() || descricao.text.isEmpty()) {
+        val prioridade = when {
+            binding.cheqBaixa.isChecked -> TarefasConstants.PRIORIDADE.BAIXA
+            binding.cheqMedia.isChecked -> TarefasConstants.PRIORIDADE.MEDIA
+            binding.cheqAlta.isChecked -> TarefasConstants.PRIORIDADE.ALTA
+            else -> null
+        }
+
+        when {
+            titulo.isEmpty() || descricao.isEmpty() -> {
                 Toast.makeText(
-                    context,
-                    "Preencher Todos os campos!!".uppercase(),
+                    requireContext(),
+                    "Preencha todos os campos!",
                     Toast.LENGTH_SHORT
                 ).show()
-
-            } else if (!cheqBaixa1.isChecked && !cheqMedia2.isChecked && !cheqAlta3.isChecked) {
-                Toast.makeText(context, "Preencher Prioridade".uppercase(), Toast.LENGTH_SHORT)
-                    .show()
-
-            } else {
-                val cheque =
-                    if (cheqBaixa1.isChecked) TarefasConstants.PRIORIDADE.BAIXA else 0 or (if (cheqMedia2.isChecked) TarefasConstants.PRIORIDADE.MEDIA else 0) or if (cheqAlta3.isChecked) TarefasConstants.PRIORIDADE.ALTA else 0
-                Toast.makeText(context, "Atividade Salva".uppercase(), Toast.LENGTH_SHORT).show()
+            }
+            prioridade == null -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Selecione a prioridade!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> {
                 val dados = TarefaEntity(
                     id = 0,
-                    titulo = titulotxt.text.toString(),
-                    descricao = descricao.text.toString(),
-                    prioridade = cheque
+                    titulo = titulo,
+                    descricao = descricao,
+                    prioridade = prioridade
                 )
 
                 viewModel.salvarDados(dados)
+
+                Toast.makeText(
+                    requireContext(),
+                    "Atividade salva!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                // opcional: limpar campos
+                binding.edTxtTitulo.text?.clear()
+                binding.edTxtDescricao.text?.clear()
+                binding.cheqBaixa.isChecked = false
+                binding.cheqMedia.isChecked = false
+                binding.cheqAlta.isChecked = false
             }
-
-
         }
-        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null // evita memory leak
     }
 }

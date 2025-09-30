@@ -25,8 +25,10 @@
     <!--    Buttons -->
     <string name="btn_salvar">Salvar</string>
 
-
-
+    <!--    campos de validação -->
+    <string name="campos_vazios">Preencher Todos os campos</string>
+    <string name="erro_prioridade">Selecione uma prioridade</string>
+    <string name="atividade_salva">Atividade Salva</string>
 
 
 </resources>
