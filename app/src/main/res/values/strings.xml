@@ -1,34 +1,32 @@
 <resources>
-    <string name="app_name">Room</string>
+    <string name="app_name">List Tasks</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="Tarefas">Listar Tarefas</string>
-    <string name="NovaTarefa">Nova Tarefa</string>
+    <string name="Tarefas">List Tasks</string>
+    <string name="NovaTarefa">New Tasks</string>
 
     <!--    Text-->
-    <string name="Nova_Atividade">Cadastrar Nova Atividade</string>
-    <string name="descrição_seta">icone de uma seta</string>
-    <string name="titulo_itens">tarefas</string>
+    <string name="Nova_Atividade">Register new activity</string>
+    <string name="titulo_itens">Tasks</string>
 
 
     <!--    Campos de identificação -->
-    <string name="titulo">Titulo</string>
-    <string name="descrição">Descrição</string>
-    <string name="nvl_prioridade">Nivel De Prioridade</string>
+    <string name="titulo">Tasks</string>
+    <string name="descrição">Description</string>
+    <string name="nvl_prioridade">Level of priority</string>
 
     <!--    Meus chequeBox -->
-    <string name="cheq_baixa">Baixo</string>
-    <string name="cheq_media">Média</string>
-    <string name="cheq_alta">Alta</string>
+    <string name="cheq_baixa">Low</string>
+    <string name="cheq_media">Average</string>
+    <string name="cheq_alta">High</string>
 
     <!--    Buttons -->
-    <string name="btn_salvar">Salvar</string>
+    <string name="btn_salvar">Save</string>
 
     <!--    campos de validação -->
-    <string name="campos_vazios">Preencher Todos os campos</string>
-    <string name="erro_prioridade">Selecione uma prioridade</string>
-    <string name="atividade_salva">Atividade Salva</string>
+    <string name="campos_vazios">Fill in all fields</string>
+    <string name="erro_prioridade">Select a priority</string>
+    <string name="atividade_salva">Saved Activity</string>
 
 
 </resources>

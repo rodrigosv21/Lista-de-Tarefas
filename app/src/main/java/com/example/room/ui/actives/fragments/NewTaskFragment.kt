@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.room.databinding.FragmentNovaTarefaBinding
-import com.example.room.entity.TarefaEntity
-import com.example.room.helper.TarefasConstants
+import com.example.room.databinding.FragmentNewTaskBinding
+import com.example.room.entity.TaskEntity
+import com.example.room.helper.TaskConstants
 import com.example.room.viewmodel.TarefaViewModel
 
-class NovaTarefaFragment : Fragment() {
+//Fragment Nova Tarefa
+class NewTaskFragment : Fragment() {
 
-    private var _binding: FragmentNovaTarefaBinding? = null
+    private var _binding: FragmentNewTaskBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: TarefaViewModel by viewModels()
@@ -23,58 +24,66 @@ class NovaTarefaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNovaTarefaBinding.inflate(inflater, container, false)
+        _binding = FragmentNewTaskBinding.inflate(inflater, container, false)
 
         binding.btnCadastrarAtividade.setOnClickListener {
-            salvarTarefa()
+            saveTasks()
         }
 
         return binding.root
     }
 
-    private fun salvarTarefa() {
-        val titulo = binding.edTxtTitulo.text.toString().trim()
-        val descricao = binding.edTxtDescricao.text.toString().trim()
+    //metodo onde busco a tarefa e salvo
+    private fun saveTasks() {
+        val title = binding.edTxtTitulo.text.toString().trim()
+        var description = binding.edTxtDescricao.text.toString().trim()
 
-        val prioridade = when {
-            binding.cheqBaixa.isChecked -> TarefasConstants.PRIORIDADE.BAIXA
-            binding.cheqMedia.isChecked -> TarefasConstants.PRIORIDADE.MEDIA
-            binding.cheqAlta.isChecked -> TarefasConstants.PRIORIDADE.ALTA
-            else -> null
+        //verifica se a descrição está vazia
+        val priorityTxt = when {
+            binding.cheqBaixa.isChecked -> TaskConstants.PRIORITY.LOW
+            binding.cheqMedia.isChecked -> TaskConstants.PRIORITY.AVERAGE
+            binding.cheqAlta.isChecked -> TaskConstants.PRIORITY.HIGH
+            else -> TaskConstants.PRIORITY.NONE
         }
 
+        //verifica se os campos estão vazios
         when {
-            titulo.isEmpty() || descricao.isEmpty() -> {
+            title.isEmpty() || description.isEmpty() -> {
                 Toast.makeText(
                     requireContext(),
                     "Preencha todos os campos!",
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            prioridade == null -> {
+
+            //verifica se a prioridade está selecionada
+            false -> {
                 Toast.makeText(
                     requireContext(),
                     "Selecione a prioridade!",
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
+            //se estiver tudo certo, salva a tarefa
             else -> {
-                val dados = TarefaEntity(
+                val data = TaskEntity(
                     id = 0,
-                    titulo = titulo,
-                    descricao = descricao,
-                    prioridade = prioridade
+                    title = title,
+                    description = description,
+                    priority = priorityTxt.toString(),
+                    isChecked = false
                 )
 
-                viewModel.salvarDados(dados)
+                viewModel.saveTask(data)
 
                 Toast.makeText(
                     requireContext(),
-                    "Atividade salva!",
+                    "task save",
                     Toast.LENGTH_SHORT
                 ).show()
 
-                // opcional: limpar campos
+
                 binding.edTxtTitulo.text?.clear()
                 binding.edTxtDescricao.text?.clear()
                 binding.cheqBaixa.isChecked = false
@@ -86,6 +95,6 @@ class NovaTarefaFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // evita memory leak
+        _binding = null
     }
 }

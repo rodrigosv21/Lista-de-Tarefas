@@ -1,0 +1,42 @@
+[33mcommit 69505e7a8965c677063866dd0abd5ad98a89bd32[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Tue Sep 30 14:33:37 2025 -0300
+
+    adicionando Atualização
+
+[33mcommit a340dda8eeedc6fc3e3766d4403b772dd0d35959[m
+Merge: d083885 1780471
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Sat Sep 27 20:58:26 2025 -0300
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit d083885626a13a5f96150fe595c1588745ea52c9[m
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Sat Sep 27 20:55:25 2025 -0300
+
+    Atualizando bugs de layout
+
+[33mcommit 1780471e3e04c77d3e169cadda313793428fa71a[m
+Author: Rodrigo Sousa <rodrigodev21@gmail.com>
+Date:   Fri Sep 26 17:56:48 2025 -0300
+
+    Create README.md
+
+[33mcommit a0a50c197e7426724ddf47070024196ce9a15a84[m
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Fri Sep 26 17:50:00 2025 -0300
+
+    implementando meus fragment e banco de dados room
+
+[33mcommit 42d0835d7e62467a29ca2c2f0ceedd92acf69a62[m
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Thu Sep 25 22:12:52 2025 -0300
+
+    implementando tela de salvar valores e icones
+
+[33mcommit b13b17fe046dbfbe5c60fb86db17ace1bb9daa75[m
+Author: rodrigosv21 <rodrigodev21@gmail.com>
+Date:   Thu Sep 25 08:10:58 2025 -0300
+
+    adicionando projeto base ja com banco de dados

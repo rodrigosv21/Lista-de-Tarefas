@@ -2,15 +2,16 @@ package com.example.room.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.room.entity.TarefaEntity
-import com.example.room.repository.TarefaRepository
+import com.example.room.entity.TaskEntity
+import com.example.room.repository.TaskRepository
 
 class TarefaViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = TarefaRepository.getInstance(application.applicationContext)
+    private val repository = TaskRepository.getInstance(application.applicationContext)
 
-    fun salvarDados(entity: TarefaEntity) {
-        repository.novaTarefa(entity)
+
+    fun saveTask(entity: TaskEntity) {
+        repository.newTask(entity)
     }
 
 

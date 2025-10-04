@@ -7,13 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_listar"
-        android:name="com.example.room.ui.actives.fragments.ListarTarefaFragment"
+        android:name="com.example.room.ui.actives.fragments.ListTaskFragment"
         android:label="@string/Tarefas"
-        tools:layout="@layout/fragment_lista" />
+        tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/navigation_nova_tarefa"
-        android:name="com.example.room.ui.actives.fragments.NovaTarefaFragment"
+        android:name="com.example.room.ui.actives.fragments.NewTaskFragment"
         android:label="@string/Nova_Atividade"
-        tools:layout="@layout/fragment_nova_tarefa" />
+        tools:layout="@layout/fragment_new_task" />
+
+    <fragment
+        android:id="@+id/navigation_sobre"
+        android:name="com.example.room.ui.actives.fragments.DetailsFragment"
+        android:label="@string/Nova_Atividade"
+        tools:layout="@layout/fragment_details" />
 </navigation>

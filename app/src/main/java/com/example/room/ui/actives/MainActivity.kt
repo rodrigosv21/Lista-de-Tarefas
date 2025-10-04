@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 🔹 Configura o Toolbar como ActionBar
+        //Configura o Toolbar como ActionBar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.hide()
 

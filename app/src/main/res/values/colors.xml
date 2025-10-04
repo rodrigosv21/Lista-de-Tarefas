@@ -6,9 +6,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--    Cores do meu cheque-->
-    <color name="col_cheq_baixa">#1CB92A</color>
-    <color name="col_cheq_media">#0386FA</color>
-    <color name="col_cheq_alta">#FD0000</color>
+    <color name="col_none">#1CB9A7</color>
+
+    <color name="col_cheq_low">#1CB92A</color>
+    <color name="col_cheq_average">#0386FA</color>
+    <color name="col_cheq_high">#FD0000</color>
 
 
 </resources>

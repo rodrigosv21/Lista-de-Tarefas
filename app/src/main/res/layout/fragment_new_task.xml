@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.actives.fragments.ListarTarefaFragment">
+    tools:context=".ui.actives.fragments.ListTaskFragment">
 
     <View
         android:id="@+id/view"
@@ -19,7 +19,6 @@
         android:layout_width="30sp"
         android:layout_height="50dp"
         android:layout_marginStart="12dp"
-        android:contentDescription="@string/descrição_seta"
         android:src="@drawable/ic_voltar"
         app:layout_constraintBottom_toBottomOf="@id/view"
         app:layout_constraintStart_toStartOf="@id/view"
@@ -105,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_baixa"
+        android:buttonTint="@color/col_cheq_low"
         android:text="@string/cheq_baixa"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_media"
+        android:buttonTint="@color/col_cheq_average"
         android:text="@string/cheq_media"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/cheq_alta"
@@ -131,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_alta"
+        android:buttonTint="@color/col_cheq_high"
         android:text="@string/cheq_alta"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

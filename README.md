@@ -1,16 +1,19 @@
-Um app Android em desenvolmento para colocar em prática conceitos de Room Database, RecyclerView e Arquitetura MVVM.
-Com ele, o usuário pode criar, listar e organizar tarefas com título, descrição e prioridade, tudo salvo localmente no dispositivo.
+An Android app under development to implement concepts of Room Database, RecyclerView, and MVVM
+architecture. With it, users can create, list, and organize tasks with titles, descriptions, and
+priorities, all saved locally on the device.
 
-✨ Funcionalidades
-✅ Adicionar novas tarefas com título, descrição e prioridade
-✅ Listagem dinâmica de tarefas usando RecyclerView
-✅ Persistência de dados com Room Database
-✅ Arquitetura limpa baseada em MVVM
-✅ Interface simples e intuitiva
+* Features
 
-🏗️ Tecnologias utilizadas
+✅ Add new tasks with titles, descriptions, and priorities
+✅ Dynamic task listing using
+RecyclerView
+✅ Data persistence with Room Database
+✅ Clean MVVM-based architecture
+✅ Simple and intuitive interface
 
-* Kotlin – linguagem principal
-* Room Database – persistência de dados local
-* RecyclerView – exibição de listas dinâmicas
-* ViewModel + LiveData – seguindo o padrão MVVM
+* Technologies used
+
+- Kotlin – core language
+- Room Database – local data persistence
+- RecyclerView – dynamic list display
+- ViewModel + LiveData – following the MVVM pattern
