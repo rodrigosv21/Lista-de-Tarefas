@@ -32,47 +32,52 @@ class ListTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerTasks.adapter = adapter
-
         observer()
-
         attachListListener()
-
-        return binding.root
     }
 
     //metodo que adiciona os listeners
     private fun attachListListener() {
-        adapter.attachListener(object : ListListener {
-            override fun onClick(id: Int) {
-                val bundle = Bundle()
-                bundle.putInt(TaskConstants.CHAVE.CHAVE, id)
+        adapter.attachListener(
+            object : ListListener {
+                override fun onClick(id: Int) {
+                    val bundle = Bundle()
+                    bundle.putInt(TaskConstants.CHAVE.CHAVE, id)
+                    findNavController().navigate(R.id.navigation_sobre, bundle)
+                }
 
-                findNavController().navigate(R.id.navigation_sobre, bundle)
-            }
+                //metodo que verifica se a prioridade foi alterada
+                override fun onPriorityAlter(taskEntity: TaskEntity) {
+                    viewModel.updateList(taskEntity)
+                }
 
-            //metodo que verifica se a prioridade foi alterada
-            override fun onPriorityAlter(taskEntity: TaskEntity) {
-                viewModel.updateList(taskEntity)
-            }
+                //metodo que verifica se a tarefa foi marcada
+                override fun onCheck(id: Int) {
+                    val task = viewModel.searchById(id)
+                    task?.let {
+                        task.isChecked = true
+                        viewModel.updadeTask(task)
+                    }
+                }
 
-            //metodo que verifica se a tarefa foi marcada
-            override fun onCheck(id: Int) {
-                val task = viewModel.searchById(id)
-                task.isChecked = true
-                viewModel.updadeTask(task)
-            }
+                //metodo que verifica se a tarefa foi desmarcada
+                override fun onUncheck(id: Int) {
+                    val task = viewModel.searchById(id)
+                    task?.let {
+                        task.isChecked = false
+                        viewModel.updadeTask(task)
+                    }
 
-            //metodo que verifica se a tarefa foi desmarcada
-            override fun onUncheck(id: Int) {
-                val task = viewModel.searchById(id)
-                task.isChecked = false
-                viewModel.updadeTask(task)
-            }
+                }
 
-        })
+            })
     }
 
     override fun onResume() {
@@ -90,7 +95,6 @@ class ListTaskFragment : Fragment() {
             adapter.updateEstate(check)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -42,7 +42,7 @@ class TaskRepository private constructor(context: Context) {
     }
 
     //Metodo para buscar uma tarefa pelo id
-    fun searchById(id: Int): TaskEntity {
+    fun searchById(id: Int): TaskEntity? {
         return taskDAO.searchById(id)
     }
 

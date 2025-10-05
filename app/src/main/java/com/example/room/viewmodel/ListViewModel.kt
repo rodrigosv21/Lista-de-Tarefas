@@ -29,7 +29,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     // Busca uma tarefa pelo ID
-    fun searchById(id: Int): TaskEntity {
+    fun searchById(id: Int): TaskEntity? {
         return repository.searchById(id)
     }
 

@@ -1,51 +1,56 @@
 package com.example.room.ui.actives
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.core.view.updateLayoutParams
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.room.R
 import com.example.room.databinding.ActivityMain2Binding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMain2Binding
+    private val binding: ActivityMain2Binding by lazy {
+        ActivityMain2Binding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Configura o Toolbar como ActionBar
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.hide()
+        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main2) as? NavHostFragment)?.let {
+            val navController = it.navController
+            binding.navView.setupWithNavController(it.navController)
+            binding.navView.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_listar -> {
+                        navController.navigate(R.id.navigation_listar)
+                        true
+                    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+                    R.id.navigation_nova_tarefa -> {
+                        navController.navigate(R.id.navigation_nova_tarefa)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
         }
 
-
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main2)
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_listar,
-                R.id.navigation_nova_tarefa
-            )
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.navView) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = insets.left
+                bottomMargin = insets.bottom
+                rightMargin = insets.right
+            }
+            WindowInsetsCompat.CONSUMED
+        }
     }
 }

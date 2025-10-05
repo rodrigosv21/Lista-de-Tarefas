@@ -5,24 +5,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 // Entity
-@Entity(tableName = "task")
+@Entity("task")
 data class TaskEntity(
-
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: Int,
-
-    @ColumnInfo(name = "title")
-    val title: String,
-
-    @ColumnInfo(name = "description")
-    val description: String,
-
-    @ColumnInfo(name = "priority")
-    val priority: String,
-
-    @ColumnInfo(name = "is_checked")
-    var isChecked: Boolean
+    @ColumnInfo("id") val id: Int,
+    @ColumnInfo("title") val title: String,
+    @ColumnInfo("description") val description: String,
+    @ColumnInfo("priority") val priority: String,
+    @ColumnInfo("is_checked") var isChecked: Boolean
 )
 
 

@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.room.R
 import com.example.room.databinding.ListTasksBinding
 import com.example.room.entity.TaskEntity
-import com.example.room.helper.TaskConstants
+import com.example.room.helper.TaskPriorityType
 import com.example.room.listener.ListListener
 
 class ListTaskViewHolder(
@@ -29,16 +29,16 @@ class ListTaskViewHolder(
         }
 
         when (task.priority) {
-            TaskConstants.PRIORITY.NONE -> item.retCheque.buttonTintList =
+            TaskPriorityType.NONE.toString() -> item.retCheque.buttonTintList =
                 item.retCheque.context.getColorStateList(R.color.col_none)
 
-            TaskConstants.PRIORITY.LOW -> item.retCheque.buttonTintList =
+            TaskPriorityType.LOW.toString() -> item.retCheque.buttonTintList =
                 item.retCheque.context.getColorStateList(R.color.col_cheq_low)
 
-            TaskConstants.PRIORITY.AVERAGE -> item.retCheque.buttonTintList =
+            TaskPriorityType.AVERAGE.toString() -> item.retCheque.buttonTintList =
                 item.retCheque.context.getColorStateList(R.color.col_cheq_average)
 
-            TaskConstants.PRIORITY.HIGH -> item.retCheque.buttonTintList =
+            TaskPriorityType.HIGH.toString() -> item.retCheque.buttonTintList =
                 item.retCheque.context.getColorStateList(R.color.col_cheq_high)
 
 
@@ -55,10 +55,10 @@ class ListTaskViewHolder(
 
         // Atualiza texto de acordo com prioridade inicial
         item.retPrioridade.text = when (entity.priority) {
-            TaskConstants.PRIORITY.LOW -> entity.priority
-            TaskConstants.PRIORITY.AVERAGE -> entity.priority
-            TaskConstants.PRIORITY.HIGH -> entity.priority
-            else -> "none"
+            TaskPriorityType.LOW.toString() -> entity.priority
+            TaskPriorityType.AVERAGE.toString() -> entity.priority
+            TaskPriorityType.HIGH.toString() -> entity.priority
+            else -> TaskPriorityType.NONE.toString()
         }
 
     }

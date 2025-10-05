@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.room.databinding.FragmentNewTaskBinding
 import com.example.room.entity.TaskEntity
 import com.example.room.helper.TaskConstants
+import com.example.room.helper.TaskPriorityType
 import com.example.room.viewmodel.TarefaViewModel
 
 //Fragment Nova Tarefa
@@ -36,19 +37,19 @@ class NewTaskFragment : Fragment() {
     //metodo onde busco a tarefa e salvo
     private fun saveTasks() {
         val title = binding.edTxtTitulo.text.toString().trim()
-        var description = binding.edTxtDescricao.text.toString().trim()
+        val description = binding.edTxtDescricao.text.toString().trim()
 
         //verifica se a descrição está vazia
         val priorityTxt = when {
-            binding.cheqBaixa.isChecked -> TaskConstants.PRIORITY.LOW
-            binding.cheqMedia.isChecked -> TaskConstants.PRIORITY.AVERAGE
-            binding.cheqAlta.isChecked -> TaskConstants.PRIORITY.HIGH
-            else -> TaskConstants.PRIORITY.NONE
+            binding.cheqBaixa.isChecked -> TaskPriorityType.LOW
+            binding.cheqMedia.isChecked -> TaskPriorityType.AVERAGE
+            binding.cheqAlta.isChecked -> TaskPriorityType.HIGH
+            else -> TaskPriorityType.NONE
         }
 
         //verifica se os campos estão vazios
         when {
-            title.isEmpty() || description.isEmpty() -> {
+            title.isEmpty() or description.isEmpty() -> {
                 Toast.makeText(
                     requireContext(),
                     "Preencha todos os campos!",
