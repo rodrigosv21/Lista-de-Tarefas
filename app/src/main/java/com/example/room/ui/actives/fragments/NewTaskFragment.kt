@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.room.databinding.FragmentNewTaskBinding
 import com.example.room.entity.TaskEntity
-import com.example.room.helper.TaskConstants
 import com.example.room.helper.TaskPriorityType
-import com.example.room.viewmodel.TarefaViewModel
+import com.example.room.viewmodel.TaskViewModel
 
 //Fragment Nova Tarefa
 class NewTaskFragment : Fragment() {
@@ -19,7 +18,7 @@ class NewTaskFragment : Fragment() {
     private var _binding: FragmentNewTaskBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TarefaViewModel by viewModels()
+    private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

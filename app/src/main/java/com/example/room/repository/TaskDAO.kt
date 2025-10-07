@@ -1,31 +1,24 @@
 package com.example.room.repository
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.room.entity.TaskEntity
+import kotlinx.coroutines.flow.Flow
 
-//my queries
 @Dao
 interface TaskDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun newTask(newTaskEntity: TaskEntity)
+    suspend fun newTask(task: TaskEntity)
 
     @Query("SELECT * FROM task")
-    fun searchAll(): List<TaskEntity>
+    fun searchAll(): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM task WHERE id = :id")
-    fun searchById(id: Int): TaskEntity?
+    suspend fun searchById(id: Int): TaskEntity?
 
     @Delete
-    fun delete(task: TaskEntity)
+    suspend fun delete(task: TaskEntity)
 
     @Update
-    fun update(task: TaskEntity)
-
-
+    suspend fun update(task: TaskEntity)
 }

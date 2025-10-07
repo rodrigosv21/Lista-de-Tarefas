@@ -11,36 +11,25 @@ import com.example.room.ui.actives.viewholder.ListTaskViewHolder
 class TaskAdapter : RecyclerView.Adapter<ListTaskViewHolder>() {
 
     private lateinit var listener: ListListener
-    private var task: List<TaskEntity> = listOf()
+    private var taskList: List<TaskEntity> = emptyList()
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListTaskViewHolder {
-        val view = ListTasksBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListTaskViewHolder(view, listener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListTaskViewHolder {
+        val binding = ListTasksBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListTaskViewHolder(binding, listener)
     }
 
-    override fun onBindViewHolder(
-        holder: ListTaskViewHolder,
-        position: Int
-    ) {
-        holder.bind(task[position])
+    override fun onBindViewHolder(holder: ListTaskViewHolder, position: Int) {
+        holder.bind(taskList[position])
     }
 
-    fun updateBooks(list: List<TaskEntity>) {
-        task = list
-        notifyDataSetChanged()
-    }
-
-    fun updateEstate(check: TaskEntity) {
-        task = task.filter { it.id != check.id }
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = task.size
+    override fun getItemCount(): Int = taskList.size
 
     fun attachListener(listener: ListListener) {
-        this@TaskAdapter.listener = listener
+        this.listener = listener
+    }
+
+    fun updateTasks(list: List<TaskEntity>) {
+        taskList = list
+        notifyDataSetChanged()
     }
 }

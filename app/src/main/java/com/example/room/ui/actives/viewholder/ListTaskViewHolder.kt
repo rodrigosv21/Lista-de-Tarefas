@@ -1,5 +1,6 @@
 package com.example.room.ui.actives.viewholder
 
+import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
 import com.example.room.R
 import com.example.room.databinding.ListTasksBinding
@@ -13,53 +14,51 @@ class ListTaskViewHolder(
 ) : RecyclerView.ViewHolder(item.root) {
 
     fun bind(task: TaskEntity) {
+        // Configura textos
         item.retTitulo.text = task.title.uppercase()
         item.retDescricao.text = task.description.uppercase()
         item.retPrioridade.text = task.priority.uppercase()
 
+        // Configura checkbox inicial sem disparar listener
+        item.retCheque.setOnCheckedChangeListener(null)
+        item.retCheque.isChecked = task.isChecked
+        item.retCheque.isEnabled = true
+
+        // Aplica strike-through inicial
+        updateStrikeThrough(task.isChecked)
+
         // Clique no título abre detalhes
         item.retTitulo.setOnClickListener { listener.onClick(task.id) }
 
-        item.retCheque.setOnClickListener {
-            if (item.retCheque.isChecked) {
+        // Clique no checkbox
+        item.retCheque.setOnCheckedChangeListener { _, isChecked ->
+            updateStrikeThrough(isChecked)
+            if (isChecked) {
                 listener.onCheck(task.id)
             } else {
                 listener.onUncheck(task.id)
             }
         }
 
-        when (task.priority) {
-            TaskPriorityType.NONE.toString() -> item.retCheque.buttonTintList =
-                item.retCheque.context.getColorStateList(R.color.col_none)
-
-            TaskPriorityType.LOW.toString() -> item.retCheque.buttonTintList =
-                item.retCheque.context.getColorStateList(R.color.col_cheq_low)
-
-            TaskPriorityType.AVERAGE.toString() -> item.retCheque.buttonTintList =
-                item.retCheque.context.getColorStateList(R.color.col_cheq_average)
-
-            TaskPriorityType.HIGH.toString() -> item.retCheque.buttonTintList =
-                item.retCheque.context.getColorStateList(R.color.col_cheq_high)
-
-
+        // Atualiza cor do checkbox conforme prioridade
+        val colorRes = when (task.priority) {
+            TaskPriorityType.NONE.toString() -> R.color.col_none
+            TaskPriorityType.LOW.toString() -> R.color.col_cheq_low
+            TaskPriorityType.AVERAGE.toString() -> R.color.col_cheq_average
+            TaskPriorityType.HIGH.toString() -> R.color.col_cheq_high
+            else -> R.color.col_none
         }
-
-        // Configura prioridade
-        setPrioridade(task)
+        item.retCheque.buttonTintList = item.retCheque.context.getColorStateList(colorRes)
+        item.retPrioridade.text = task.priority
     }
 
-    private fun setPrioridade(entity: TaskEntity) {
-        // Define estado inicial
-        item.retCheque.isEnabled = true
-        item.retCheque.isChecked = entity.isChecked
-
-        // Atualiza texto de acordo com prioridade inicial
-        item.retPrioridade.text = when (entity.priority) {
-            TaskPriorityType.LOW.toString() -> entity.priority
-            TaskPriorityType.AVERAGE.toString() -> entity.priority
-            TaskPriorityType.HIGH.toString() -> entity.priority
-            else -> TaskPriorityType.NONE.toString()
+    private fun updateStrikeThrough(isChecked: Boolean) {
+        if (isChecked) {
+            item.retTitulo.paintFlags = item.retTitulo.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            item.retDescricao.paintFlags = item.retDescricao.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        } else {
+            item.retTitulo.paintFlags = item.retTitulo.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            item.retDescricao.paintFlags = item.retDescricao.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
-
     }
 }

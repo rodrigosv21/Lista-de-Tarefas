@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
             binding.navView.setupWithNavController(it.navController)
             binding.navView.setOnItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.navigation_listar -> {
-                        navController.navigate(R.id.navigation_listar)
+                    R.id.navigation_list -> {
+                        navController.navigate(R.id.navigation_list)
                         true
                     }
 
-                    R.id.navigation_nova_tarefa -> {
-                        navController.navigate(R.id.navigation_nova_tarefa)
+                    R.id.navigation_new_task -> {
+                        navController.navigate(R.id.navigation_new_task)
                         true
                     }
 

@@ -1,49 +1,25 @@
 package com.example.room.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.example.room.entity.TaskEntity
 import com.example.room.repository.TaskRepository
+import kotlinx.coroutines.launch
 
-//ViewModel Lista de Tarefas
 class ListViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: TaskRepository =
-        TaskRepository.getInstance(application.applicationContext)
 
-    private val _tasks = MutableLiveData<List<TaskEntity>>()
-    val task: LiveData<List<TaskEntity>> = _tasks
+    private val repository = TaskRepository.getInstance(application.applicationContext)
 
-    private val _check = MutableLiveData<TaskEntity>()
-    val check: LiveData<TaskEntity> = _check
+    val tasks: LiveData<List<TaskEntity>> = repository.searchAll().asLiveData()
 
-    // Inicializa a lista de tarefas assim que instanciada
-    init {
-        repository.searchAll()
-    }
-
-    // Busca todas as tarefas
-    fun searchAll() {
-        _tasks.value = repository.searchAll()
-    }
-
-    // Busca uma tarefa pelo ID
-    fun searchById(id: Int): TaskEntity? {
-        return repository.searchById(id)
-    }
-
-    // Atualiza uma tarefa
-    fun updateList(task: TaskEntity) {
+    fun updateTask(task: TaskEntity) = viewModelScope.launch {
         repository.update(task)
-        searchAll()
     }
 
-    // Atualiza uma check
-    fun updadeTask(check: TaskEntity) {
-        repository.update(check)
-        searchAll()
+    fun toggleCheck(task: TaskEntity) = viewModelScope.launch {
+        task.isChecked = !task.isChecked
+        repository.update(task)
     }
 
-
+    suspend fun searchById(id: Int): TaskEntity? = repository.searchById(id)
 }

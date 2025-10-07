@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_listar">
+    app:startDestination="@+id/navigation_list">
 
     <fragment
-        android:id="@+id/navigation_listar"
+        android:id="@+id/navigation_list"
         android:name="com.example.room.ui.actives.fragments.ListTaskFragment"
         android:label="@string/Tarefas"
         tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/navigation_nova_tarefa"
+        android:id="@+id/navigation_new_task"
         android:name="com.example.room.ui.actives.fragments.NewTaskFragment"
         android:label="@string/Nova_Atividade"
         tools:layout="@layout/fragment_new_task" />
 
     <fragment
-        android:id="@+id/navigation_sobre"
+        android:id="@+id/navigation_details"
         android:name="com.example.room.ui.actives.fragments.DetailsFragment"
         android:label="@string/Nova_Atividade"
         tools:layout="@layout/fragment_details" />

@@ -1,11 +1,12 @@
 package com.example.room.ui.actives.fragments
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.room.databinding.FragmentDetailsBinding
 import com.example.room.helper.TaskConstants
@@ -16,10 +17,11 @@ class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailsViewModel by viewModels()
-    private var taskFaId = 0
+    private var taskId = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
@@ -27,28 +29,59 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        taskFaId = arguments?.getInt(TaskConstants.CHAVE.CHAVE) ?: 0
-        viewModel.updateTask(taskFaId)
+        taskId = arguments?.getInt(TaskConstants.CHAVE.CHAVE) ?: 0
+        viewModel.loadTask(taskId)
         setObservers()
-        binding
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        // Botão de voltar
         binding.buttonBack.setOnClickListener {
             findNavController().popBackStack()
         }
 
-    }
+        // Botão de deletar
+        binding.btnRemover.setOnClickListener {
+            viewModel.task.value?.let { task ->
+                viewModel.deleteTask(task)
+            }
+        }
 
-    private fun setObservers() {
-        viewModel.task.observe(viewLifecycleOwner) {
-            binding.apply {
-                it?.let {
-                    retTxtTitulo.text = it.title
-                    retCheque.isChecked = it.priority.toBoolean()
-                    retTxtDescricao.text = it.description
-                }
+        // Checkbox de status da tarefa
+        binding.retCheque.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.task.value?.let { task ->
+                task.isChecked = isChecked
+                viewModel.updateTask(task)
             }
         }
     }
 
+    private fun setObservers() {
+        // Observa a tarefa carregada
+        viewModel.task.observe(viewLifecycleOwner) { task ->
+            task?.let {
+                binding.retTxtTitulo.text = it.title
+                binding.retTxtDescricao.text = it.description
+
+                binding.retCheque.setOnCheckedChangeListener(null)
+                binding.retCheque.isChecked = it.isChecked
+
+                binding.retCheque.setOnCheckedChangeListener { _, isChecked ->
+                    it.isChecked = isChecked
+                    viewModel.updateTask(it)
+                }
+            }
+        }
+
+        // Observa se a tarefa foi deletada
+        viewModel.taskDeleted.observe(viewLifecycleOwner) { deleted ->
+            if (deleted) {
+                Toast.makeText(requireContext(), "Task delete", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
