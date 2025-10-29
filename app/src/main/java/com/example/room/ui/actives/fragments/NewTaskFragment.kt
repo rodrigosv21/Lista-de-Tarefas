@@ -56,15 +56,6 @@ class NewTaskFragment : Fragment() {
                 ).show()
             }
 
-            //verifica se a prioridade está selecionada
-            false -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Selecione a prioridade!",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
             //se estiver tudo certo, salva a tarefa
             else -> {
                 val data = TaskEntity(

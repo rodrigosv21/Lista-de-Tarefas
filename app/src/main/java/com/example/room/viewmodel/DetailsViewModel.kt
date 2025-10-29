@@ -21,12 +21,6 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         _task.value = repository.searchById(id)
     }
 
-    // Atualiza a tarefa
-    fun updateTask(task: TaskEntity) = viewModelScope.launch {
-        repository.update(task)
-        _task.value = task
-    }
-
     // Deleta a tarefa
     fun deleteTask(task: TaskEntity) = viewModelScope.launch {
         repository.delete(task)

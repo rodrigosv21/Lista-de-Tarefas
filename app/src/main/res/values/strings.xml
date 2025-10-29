@@ -11,7 +11,7 @@
 
 
     <!--    Campos de identificação -->
-    <string name="titulo">Tasks</string>
+    <string name="titulo">Task</string>
     <string name="descrição">Description</string>
     <string name="nvl_prioridade">Level of priority</string>
 

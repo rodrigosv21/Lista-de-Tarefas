@@ -44,15 +44,7 @@ class DetailsFragment : Fragment() {
         // Botão de deletar
         binding.btnRemover.setOnClickListener {
             viewModel.task.value?.let { task ->
-                viewModel.deleteTask(task)
-            }
-        }
-
-        // Checkbox de status da tarefa
-        binding.retCheque.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.task.value?.let { task ->
-                task.isChecked = isChecked
-                viewModel.updateTask(task)
+                viewModel .deleteTask(task)
             }
         }
     }
@@ -63,14 +55,7 @@ class DetailsFragment : Fragment() {
             task?.let {
                 binding.retTxtTitulo.text = it.title
                 binding.retTxtDescricao.text = it.description
-
-                binding.retCheque.setOnCheckedChangeListener(null)
-                binding.retCheque.isChecked = it.isChecked
-
-                binding.retCheque.setOnCheckedChangeListener { _, isChecked ->
-                    it.isChecked = isChecked
-                    viewModel.updateTask(it)
-                }
+                binding.retPrriority.text = it.priority
             }
         }
 

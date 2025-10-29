@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// Define the TaskEntity data class with Room annotations primeiro para criar a tabela "task"
 @Entity("task")
 data class TaskEntity(
     @PrimaryKey(autoGenerate = true)

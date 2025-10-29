@@ -15,14 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="30sp"
-        android:layout_height="50dp"
-        android:layout_marginStart="12dp"
-        android:src="@drawable/ic_voltar"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view" />
 
     <TextView
         android:id="@+id/txt_nova_atividade"
@@ -30,7 +22,9 @@
         android:layout_height="48dp"
         android:layout_marginTop="50dp"
         android:text="@string/Nova_Atividade"
+        android:textAlignment="center"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view" />
@@ -98,44 +92,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ed_txt_descricao" />
 
-    <CheckBox
-        android:id="@+id/cheq_baixa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_low"
-        android:text="@string/cheq_baixa"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_prioridade" />
-
-    <CheckBox
-        android:id="@+id/cheq_media"
-
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/cheques"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_average"
-        android:text="@string/cheq_media"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/cheq_alta"
-        app:layout_constraintStart_toStartOf="@id/cheq_baixa"
-        app:layout_constraintTop_toBottomOf="@id/txt_prioridade" />
-
-    <CheckBox
-        android:id="@+id/cheq_alta"
-
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:buttonTint="@color/col_cheq_high"
-        android:text="@string/cheq_alta"
-        android:textStyle="bold"
+        android:gravity="center|clip_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cheq_media"
-        app:layout_constraintTop_toBottomOf="@id/txt_prioridade" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_prioridade">
+
+        <RadioButton
+            android:id="@+id/cheq_baixa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:buttonTint="@color/col_cheq_low"
+            android:text="@string/cheq_baixa" />
+
+        <RadioButton
+            android:id="@+id/cheq_media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10.dp"
+            android:buttonTint="@color/col_cheq_average"
+            android:checked="false"
+            android:text="@string/cheq_media" />
+
+        <RadioButton
+            android:id="@+id/cheq_alta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10.dp"
+            android:layout_marginEnd="10dp"
+            android:buttonTint="@color/col_cheq_average"
+            android:text="@string/cheq_alta" />
+
+    </RadioGroup>
 
     <Button
         android:id="@+id/btn_cadastrar_atividade"
@@ -150,6 +144,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cheq_baixa" />
+        app:layout_constraintTop_toBottomOf="@id/cheques" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

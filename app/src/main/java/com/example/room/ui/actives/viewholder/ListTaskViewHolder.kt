@@ -55,10 +55,13 @@ class ListTaskViewHolder(
     private fun updateStrikeThrough(isChecked: Boolean) {
         if (isChecked) {
             item.retTitulo.paintFlags = item.retTitulo.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            item.retDescricao.paintFlags = item.retDescricao.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            item.retDescricao.paintFlags =
+                item.retDescricao.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
-            item.retTitulo.paintFlags = item.retTitulo.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-            item.retDescricao.paintFlags = item.retDescricao.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            item.retTitulo.paintFlags =
+                item.retTitulo.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            item.retDescricao.paintFlags =
+                item.retDescricao.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
 }
