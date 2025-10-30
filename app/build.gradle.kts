@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,10 +39,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+
 }
 
-dependencies {
 
+dependencies {
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

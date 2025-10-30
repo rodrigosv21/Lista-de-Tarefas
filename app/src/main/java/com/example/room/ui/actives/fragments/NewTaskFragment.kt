@@ -1,18 +1,19 @@
 package com.example.room.ui.actives.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.room.databinding.FragmentNewTaskBinding
 import com.example.room.entity.TaskEntity
 import com.example.room.helper.TaskPriorityType
 import com.example.room.viewmodel.TaskViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-//Fragment Nova Tarefa
+@AndroidEntryPoint
 class NewTaskFragment : Fragment() {
 
     private var _binding: FragmentNewTaskBinding? = null
@@ -74,12 +75,13 @@ class NewTaskFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-
-                binding.edTxtTitulo.text?.clear()
-                binding.edTxtDescricao.text?.clear()
-                binding.cheqBaixa.isChecked = false
-                binding.cheqMedia.isChecked = false
-                binding.cheqAlta.isChecked = false
+                binding.apply {
+                    edTxtTitulo.text?.clear()
+                    edTxtDescricao.text?.clear()
+                    cheqBaixa.isChecked = false
+                    cheqMedia.isChecked = false
+                    cheqAlta.isChecked = false
+                }
             }
         }
     }

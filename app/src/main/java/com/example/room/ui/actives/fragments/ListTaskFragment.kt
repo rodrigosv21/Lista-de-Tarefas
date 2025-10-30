@@ -15,14 +15,17 @@ import com.example.room.helper.TaskConstants
 import com.example.room.listener.ListListener
 import com.example.room.ui.actives.adapter.TaskAdapter
 import com.example.room.viewmodel.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope
 
+@AndroidEntryPoint
 class ListTaskFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
+    // ViewModel usando Hilt
     private val viewModel: ListViewModel by viewModels()
     private val adapter = TaskAdapter()
 
@@ -32,6 +35,8 @@ class ListTaskFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerTasks.adapter = adapter
 

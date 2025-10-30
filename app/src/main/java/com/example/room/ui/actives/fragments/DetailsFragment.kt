@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.room.databinding.FragmentDetailsBinding
 import com.example.room.helper.TaskConstants
 import com.example.room.viewmodel.DetailsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null

@@ -15,9 +15,11 @@ class ListTaskViewHolder(
 
     fun bind(task: TaskEntity) {
         // Configura textos
-        item.retTitulo.text = task.title.uppercase()
-        item.retDescricao.text = task.description.uppercase()
-        item.retPrioridade.text = task.priority.uppercase()
+        item.apply {
+            retTitulo.text = task.title.uppercase()
+            retDescricao.text = task.description.uppercase()
+            retPrioridade.text = task.priority.uppercase()
+        }
 
         // Configura checkbox inicial sem disparar listener
         item.retCheque.setOnCheckedChangeListener(null)

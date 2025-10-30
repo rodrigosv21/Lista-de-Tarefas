@@ -1,25 +1,29 @@
 package com.example.room.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.room.entity.TaskEntity
 import com.example.room.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ListViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class ListViewModel @Inject constructor(
+    private val repository: TaskRepository
+) : ViewModel() {
 
-    private val repository = TaskRepository.getInstance(application.applicationContext)
-
-    val tasks: LiveData<List<TaskEntity>> = repository.searchAll().asLiveData()
+    val tasks = repository.searchAll().asLiveData()
 
     fun updateTask(task: TaskEntity) = viewModelScope.launch {
         repository.update(task)
     }
 
     fun toggleCheck(task: TaskEntity) = viewModelScope.launch {
-        task.isChecked = !task.isChecked
-        repository.update(task)
+        val updated = task.copy(isChecked = !task.isChecked)
+        repository.update(updated)
     }
 
-    suspend fun searchById(id: Int): TaskEntity? = repository.searchById(id)
+    suspend fun searchById(id: Int) = repository.searchById(id)
 }

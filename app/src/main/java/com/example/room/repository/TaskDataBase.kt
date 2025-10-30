@@ -13,7 +13,7 @@ abstract class TaskDataBase : RoomDatabase() {
 
     companion object {
         private const val DATABASE_NAME = "taskDB"
-        @Volatile private var instance: TaskDataBase? = null // Garantir que a instância seja visível para todas as threads
+        @Volatile private var instance: TaskDataBase? = null
 
         fun getDatabase(context: Context): TaskDataBase {
             return instance ?: synchronized(this) {

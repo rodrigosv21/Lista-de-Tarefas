@@ -1,17 +1,19 @@
 package com.example.room.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.room.entity.TaskEntity
 import com.example.room.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class TaskViewModel @Inject constructor(
+    private val repository: TaskRepository
+) : ViewModel() {
 
-    private val repository = TaskRepository.getInstance(application.applicationContext)
-
-    fun saveTask(entity: TaskEntity) = viewModelScope.launch {
-        repository.newTask(entity)
+    fun saveTask(task: TaskEntity) = viewModelScope.launch {
+        repository.newTask(task)
     }
 }
